@@ -12,39 +12,53 @@ typedef enum gender
     other
 } gender;
 
-typedef struct program
+typedef struct program_t
 {
     char name[64];
     int code;
     char responsible[256];
     char email[256];
-} program;
+} program_t;
 
-typedef struct student
+typedef struct student_t
 {
     char personal_number[10];
     char name[256];
     gender gender;
     int age;
     char email[256];
-    program *programp;
-} student;
+    program_t *programp;
+} student_t;
 
-typedef struct studrecord
+typedef struct studrecord_t
 {
-    student *population;
+    student_t *population;
     size_t count;
     size_t capacity;
-} studrecord;
+} studrecord_t;
 
-typedef struct progrecord
+typedef struct progrecord_t
 {
-    program *population;
+    program_t *population;
     size_t count;
     size_t capacity;
-} progrecord;
+} progrecord_t;
 
-void save_student(student stud, studrecord *studrecord)
+void print_student(student_t *stud)
+{
+    printf("Personal number: %s\nName: %s\nGender: %d\nAge: %d\nemail: %s\nProgram: %d\n",
+           stud->personal_number, stud->name, stud->gender, stud->age, stud->email, stud->programp->code);
+}
+
+void print_student_record(studrecord_t *studrecord)
+{
+    for (int i = 0; i < studrecord->count; i++)
+    {
+        print_student(studrecord->population + 1);
+    }
+}
+
+void save_student(student_t stud, studrecord_t *studrecord)
 {
     //  Do we have enough capacity, if not we extend it and reallocate.
     if (studrecord->count >= studrecord->capacity)
@@ -57,9 +71,9 @@ void save_student(student stud, studrecord *studrecord)
         {
             studrecord->capacity *= 2;
         }
-        studrecord->population = realloc(studrecord->population, studrecord->capacity * sizeof(student));
+        studrecord->population = realloc(studrecord->population, studrecord->capacity * sizeof(student_t));
     }
-    // Add person to the array.
+    // Add student to the record.
     studrecord->population[studrecord->count + 1] = stud;
     studrecord->count++;
 }
@@ -68,7 +82,7 @@ int enter_gender()
 {
     while (true)
     {
-        printf("Enter student gender by entering 1-3:\n 1. Male\n2. Femaile\n3. Other");
+        printf("Enter student gender by entering 1-3:\n 1. Male\n2. Femaile\n3. Other\n");
         int sexadded = 0;
         scanf("%d", &sexadded);
         if (sexadded == 1)
@@ -90,32 +104,47 @@ int enter_gender()
     }
 }
 
-int enter_program_code(progrecord progrec)
+int enter_program_code(progrecord_t *progrec)
 {
     while (true)
     {
         printf("Enter student program code (8 digits)\n");
         int tempcode = 0;
         scanf("%8d", &tempcode);
-        for (int i = 0; i < progrec.count; i++)
+        for (int i = 0; i < progrec->count; i++)
         {
-            if (tempcode == progrec.population[i].code)
+            if (tempcode == progrec->population[i].code)
             {
                 return tempcode;
             } // Sök och kolla så att denna programkod finns
         }
-        else
-        {
-            prinf("No such program exists, try again.")
-        }
+        printf("No such program exists, try again.\n");
     }
 }
 
-student add_student()
+void print_program(program_t *prog)
 {
-    student tempstud = {0};
-    char number[11];
-    scanf("%10s", number);
+    printf("Name: %s \nCode: %d \nResponsible: %s\nemail: %s\n",
+           prog->name, prog->code, prog->responsible, prog->email);
+}
+
+void print_program_name(program_t *prog)
+{
+}
+
+void print_program_record(progrecord_t *progrec)
+{
+    for (int i = 0; i < progrec->count; i++)
+    {
+        printf("%d", i);
+        print_program(progrec->population + i);
+    }
+}
+
+student_t add_student(progrecord_t *progrec)
+{
+    student_t tempstud = {0};
+    scanf("%10s", tempstud.personal_number);
     printf("Personal number added to new student.\n");
     printf("Enter student name\n");
     scanf(" %255[^\n]", tempstud.name);
@@ -126,11 +155,20 @@ student add_student()
     scanf("%3d", &tempstud.age);
     printf("Enter student email\n");
     scanf("%255s", tempstud.email);
-    tempstud.programp->code = enter_program_code();
+    tempstud.programp = &(enter_program_code(progrec)); // FIXA DETTA POINTERCRAP VÄLJ FRÅN LISTA ISTÄLLET.
+    return tempstud;
+}
+
+program_t add_program()
+{
+    program_t tempprog = {0};
 }
 
 void main()
 {
+    progrecord_t all_programs = {0};
+    studrecord_t all_students = {0};
+    add_program();
     add_student();
 }
 // funk add
