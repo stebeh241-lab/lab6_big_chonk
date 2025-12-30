@@ -22,7 +22,7 @@ typedef struct program_t
 
 typedef struct student_t
 {
-    char personal_number[10];
+    char personal_number[11];
     char name[256];
     gender gender;
     int age;
@@ -78,11 +78,31 @@ void save_student(student_t stud, studrecord_t *studrecord)
     studrecord->count++;
 }
 
+void save_program(program_t program, progrecord_t *progrecord)
+{
+    //  Do we have enough capacity, if not we extend it and reallocate.
+    if (progrecord->count >= progrecord->capacity)
+    {
+        if (progrecord->capacity == 0)
+        {
+            progrecord->capacity = 32;
+        }
+        else
+        {
+            progrecord->capacity *= 2;
+        }
+        progrecord->population = realloc(progrecord->population, progrecord->capacity * sizeof(program_t));
+    }
+    // Add student to the record.
+    progrecord->population[progrecord->count + 1] = program;
+    progrecord->count++;
+}
+
 int enter_gender()
 {
     while (true)
     {
-        printf("Enter student gender by entering 1-3:\n 1. Male\n2. Femaile\n3. Other\n");
+        printf("Enter student gender by entering 1-3:\n1. Male\n2. Femaile\n3. Other\n");
         int sexadded = 0;
         scanf("%d", &sexadded);
         if (sexadded == 1)
@@ -128,8 +148,13 @@ void print_program(program_t *prog)
            prog->name, prog->code, prog->responsible, prog->email);
 }
 
-void print_program_name(program_t *prog)
+void print_program_names(progrecord_t *progrec)
 {
+    for (int i = 0; i < progrec->count; i++)
+    {
+        printf("%d", i);
+        printf("%s\n", progrec->population[i].name);
+    }
 }
 
 void print_program_record(progrecord_t *progrec)
@@ -144,6 +169,7 @@ void print_program_record(progrecord_t *progrec)
 student_t add_student(progrecord_t *progrec)
 {
     student_t tempstud = {0};
+    printf("Enter student personal number (10 digits)\n");
     scanf("%10s", tempstud.personal_number);
     printf("Personal number added to new student.\n");
     printf("Enter student name\n");
@@ -152,10 +178,15 @@ student_t add_student(progrecord_t *progrec)
     tempstud.gender = enter_gender();
     printf("Gender added to new student.\n");
     printf("Enter student age\n");
-    scanf("%3d", &tempstud.age);
+    scanf(" %d", &tempstud.age);
     printf("Enter student email\n");
+    printf("DEBUG: Adress till email är %p\n", (void *)tempstud.email);
     scanf("%255s", tempstud.email);
-    tempstud.programp = &(enter_program_code(progrec)); // FIXA DETTA POINTERCRAP VÄLJ FRÅN LISTA ISTÄLLET.
+    printf("Pick student program by entering number 1-%ld\n", progrec->count);
+    print_program_names(progrec);
+    int pickedprogram = 0;
+    scanf("%d", &pickedprogram);
+    tempstud.programp = &progrec->population[pickedprogram];
     return tempstud;
 }
 
@@ -168,8 +199,28 @@ void main()
 {
     progrecord_t all_programs = {0};
     studrecord_t all_students = {0};
-    add_program();
-    add_student();
+    program_t maskintektik = {0};
+    program_t jobbamedata = {0};
+    save_program(maskintektik, &all_programs);
+    save_program(jobbamedata, &all_programs);
+    student_t tempstudent = (add_student(&all_programs));
+    save_student(tempstudent, &all_students);
+    print_program_record(&all_programs);
+    print_student_record(&all_students);
+    // program_t maskinteknik;
+    // strncpy(maskinteknik.name, "Maskinteknik", sizeof(maskinteknik.name) - 1);
+    // maskinteknik.code = 20230001;
+    // strncpy(maskinteknik.responsible, "Jens Oakenshield", sizeof(maskinteknik.responsible) - 1);
+    // strncpy(maskinteknik.email, "jensa@oru.se", sizeof(maskinteknik.email - 1));
+    // save_program(maskinteknik, all_programs);
+    // student_t student_1;
+    // strncpy(student_1.personal_number, "8704166654", sizeof(student_1.personal_number -1));
+    // strncpy(student_1.name, "Stefan Bergman", sizeof();
+    // student_1.gender = male;
+    // student_1.age = 38;
+    // student_1.email = "superkingen@kingmail.com";
+    // student_1.programp = &maskinteknik;
+    // save_student(student_1, all_students);
 }
 // funk add
 //  print
