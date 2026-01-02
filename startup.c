@@ -253,6 +253,10 @@ student_t *search_student_personal_nr(char *searchstring, studrecord_t *studrec)
         {
             return &studrec->population[i];
         }
+        else
+        {
+            printf("No student with that personal number was found\n");
+        }
     }
     return NULL;
 }
@@ -424,6 +428,24 @@ void search_student_by_program(int progcode, studrecord_t *studrec)
     }
 }
 
+void delete_student(char *searchstring, studrecord_t *studrec)
+{
+    // Loop through student record to find index of student to delete.
+    for (int i = 0; i < studrec->count; i++)
+    {
+        if (strcmp(studrec->population[i].personal_number, searchstring) == 0)
+        {
+            studrec->population[i] = studrec->population[studrec->count - 1];
+            studrec->count--;
+            printf("Student was deleted\n");
+        }
+        else
+        {
+            printf("No student with that personal number was found\n");
+        }
+    }
+}
+
 int main_prompt()
 {
     printf("Choose action:\n");
@@ -460,9 +482,101 @@ void main()
     int choice = -1;
     while (true)
     {
-        choice = (main_prompt);
+        choice = main_prompt();
+        if (choice == 1)
+        {
+            save_student(add_student(&all_programs), &all_students);
+        }
+        if (choice == 2)
+        {
+            printf("Enter personal numer of student you want to modify\n");
+            char searchstring[11];
+            scanf("%10s", searchstring);
+            modify_student(search_student_personal_nr(searchstring, &all_students), &all_students, &all_programs);
+        }
+        if (choice == 3)
+        {
+            printf("Enter personal numer of student you want to delete\n");
+            char searchstring[11];
+            scanf("%10s", searchstring);
+            delete_student(searchstring, &all_students);
+        }
+        if (choice == 4)
+        {
+            while (true)
+            {
+                int search_choice = -1;
+                search_choice = search_prompt();
+                if (search_choice == 1)
+                {
+                    printf("Enter personal numer to search for\n");
+                    char searchstring[11];
+                    scanf("%10s", searchstring);
+                    search_student_personal_nr(searchstring, &all_students);
+                }
+                else if (search_choice == 2)
+                {
+                    printf("Enter name to search for\n");
+                    char searchstring[256];
+                    scanf("%255s", searchstring);
+                    search_student_by_name(searchstring, &all_students);
+                }
+                else if (search_choice == 3)
+                {
+                    printf("Enter program code to list students for\n");
+                    int code = -1;
+                    scanf("%8d", &code);
+                    search_student_by_program(code, &all_students);
+                }
+                else if (search_choice == 4)
+                {
+                    // Skriv funk för statistics!
+                }
+                else
+                    break;
+            }
+        }
+        if (choice == 5)
+        {
+            printf("Choose name of file to save to\n");
+            char filenamne[64];
+            scanf("%63s", filenamne);
+            save_to_file(filenamne, &all_programs, &all_students);
+            printf("Record was saved to %s\n", filenamne);
+        }
+        if (choice == 6)
+        {
+            printf("WARNING any unsaved data will be lost, continue? Y/N\n");
+            char confirmation = 'a';
+            scanf(" %c", &confirmation);
+            if (confirmation == 'Y' || confirmation == 'y')
+            {
+                printf("Choose name of file to load\n");
+                char filenamne[64];
+                scanf("%63s", filenamne);
+                read_from_file(filenamne, &all_programs, &all_students);
+            }
+            else
+                continue;
+        }
+        if (choice == 7)
+        {
+            save_program(add_program(), &all_programs);
+        }
+        if (choice == 8)
+        {
+            printf("Enter code of program you want to modify\n");
+            int code = 0;
+            scanf("%8d", &code);
+            modify_program(search_program(code, &all_programs), &all_programs);
+        }
+        if (choice == 9)
+        {
+            return;
+        }
     }
 }
+
 // strstr
 //  program_t maskintektik = {0};
 //  strncpy(maskintektik.name, "Maskinteknik", sizeof(maskintektik.name) - 1);
