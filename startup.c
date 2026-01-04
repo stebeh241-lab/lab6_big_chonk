@@ -22,7 +22,7 @@ typedef struct program_t
 
 typedef struct student_t
 {
-    char personal_number[11];
+    char personal_number[12];
     char name[256];
     gender gender;
     int age;
@@ -247,18 +247,59 @@ program_t add_program()
 student_t *search_student_personal_nr(char *searchstring, studrecord_t *studrec)
 {
     // Loop through student record and returns pointer to student if personal number matches.
+    int foundcount = 0;
     for (int i = 0; i < studrec->count; i++)
     {
         if (strcmp(studrec->population[i].personal_number, searchstring) == 0)
         {
-            return &studrec->population[i];
-        }
-        else
-        {
-            printf("No student with that personal number was found\n");
+            printf("Student found on index %d, name %s\n", i, studrec->population[i].name);
+            // return &studrec->population[i];
+            print_student(&studrec->population[i]);
+            foundcount++;
         }
     }
+    printf("%d students found\n", foundcount);
     return NULL;
+}
+
+void print_statistics(progrecord_t *progrec, studrecord_t *studrec)
+{
+    for (int i = 0; i < progrec->count; i++)
+    {
+        int thisprogcount = 0;
+        int thisprogmales = 0;
+        int thisprogfemales = 0;
+        int thisprogothers = 0;
+        int agetotal = 0;
+        for (int n = 0; n < studrec->count; n++)
+        {
+            if (&progrec->population[i]->code == &studrec->population[n].programp->code)
+            {
+                agetotal += studrec->population[n].age;
+                thisprogcount++;
+                if (studrec->population[n].gender == 0)
+                {
+                    thisprogmales++;
+                }
+                else if (studrec->population[n].gender == 1)
+                {
+                    thisprogfemales++;
+                }
+                else if (studrec->population[n].gender == 2)
+                {
+                    thisprogothers++;
+                }
+            }
+        }
+        printf("%s has %d students\n%d of which are male\n%d of which are females\n%d of which are other\n",
+               progrec->population[i]->name,
+               thisprogcount,
+               thisprogmales,
+               thisprogfemales,
+               thisprogothers);
+        float avgage = agetotal / thisprogcount;
+        printf("Average age is %.0f,\n", avgage);
+    }
 }
 
 void modify_student(student_t *student, studrecord_t *studrec, progrecord_t *progrec)
@@ -340,7 +381,7 @@ void save_to_file(char *filename, progrecord_t *progrec, studrecord_t *studrec)
         fprintf(fp, "%s\n", progrec->population[i]->responsible);
         fprintf(fp, "%s\n", progrec->population[i]->email);
     }
-    for (int i = 0; i > studrec->count; i++)
+    for (int i = 0; i < studrec->count; i++)
     {
         fprintf(fp, "student\n");
         fprintf(fp, "%s\n", studrec->population[i].personal_number);
@@ -350,28 +391,26 @@ void save_to_file(char *filename, progrecord_t *progrec, studrecord_t *studrec)
         fprintf(fp, "%s\n", studrec->population[i].email);
         fprintf(fp, "%d\n", studrec->population[i].programp->code);
     }
+    fclose(fp);
 }
 
 void read_from_file(char *filename, progrecord_t *progrec, studrecord_t *studrec)
 {
-    progrecord_t all_programs;
-    studrecord_t all_students;
     FILE *fp;
-    fp = fopen(filename, "w");
+    fp = fopen(filename, "r");
     if (fp == NULL)
     {
         perror("Error opening file in read_file");
         return;
     }
     char buffer[256];
-    while (fgets(buffer, sizeof(buffer), fp))
+    while (fgets(buffer, sizeof(buffer), fp) != NULL)
     {
         buffer[strcspn(buffer, "\n")] = 0;  // Just removes the \n
         if (strcmp(buffer, "program") == 0) // Is difference between buffer and "program" 0?
         {
+            printf("found a program!\n");
             program_t tmp_prog = {0};
-            fgets(tmp_prog.name, 64, fp);
-            tmp_prog.name[strcspn(tmp_prog.name, "\n")] = 0;
             fgets(tmp_prog.name, 64, fp);
             tmp_prog.name[strcspn(tmp_prog.name, "\n")] = 0;
             fgets(buffer, sizeof(buffer), fp);
@@ -384,9 +423,10 @@ void read_from_file(char *filename, progrecord_t *progrec, studrecord_t *studrec
         }
         else if (strcmp(buffer, "student") == 0)
         {
+            printf("found a student!\n");
             student_t tmp_stud = {0};
             int progcode;
-            fgets(tmp_stud.personal_number, 11, fp);
+            fgets(tmp_stud.personal_number, sizeof(tmp_stud.personal_number), fp);
             tmp_stud.personal_number[strcspn(tmp_stud.personal_number, "\n")] = 0;
             fgets(tmp_stud.name, 256, fp);
             tmp_stud.name[strcspn(tmp_stud.name, "\n")] = 0;
@@ -403,16 +443,16 @@ void read_from_file(char *filename, progrecord_t *progrec, studrecord_t *studrec
             save_student(tmp_stud, studrec);
         }
     }
+    fclose(fp);
 }
 
 void search_student_by_name(char *searchstring, studrecord_t *studrec)
 {
     for (int i = 0; i < studrec->count; i++)
     {
-        char *found = strstr(studrec->population[i].name, searchstring);
-        if (found != 0)
+        if (strstr(studrec->population[i].name, searchstring) != NULL)
         {
-            printf("%s", found);
+            printf("%s, %s\n", studrec->population[i].name, studrec->population[i].personal_number);
         }
     }
 }
@@ -448,6 +488,7 @@ void delete_student(char *searchstring, studrecord_t *studrec)
 
 int main_prompt()
 {
+    printf("***********************************************\n");
     printf("Choose action:\n");
     printf("1. Add student      (load record first if you want to add to existing record)\n");
     printf("2. Modify student   (load record first to have something to modify)\n");
@@ -457,7 +498,7 @@ int main_prompt()
     printf("6. Load record      (currently loaded record will be lost)\n");
     printf("7. Add program      (load record first if you want to add to existing record\n");
     printf("8. Modify program   (load record first to have something to modify\n");
-    printf("9. Exit             (load record first to have something to modify\n");
+    printf("9. Exit\n");
     int choice = -1;
     scanf("%d", &choice);
     return choice;
@@ -465,11 +506,13 @@ int main_prompt()
 
 int search_prompt()
 {
+    printf("***********************************************\n");
     printf("Choose action:\n");
-    printf("1. Search student by personal number");
+    printf("1. Search student by personal number\n");
     printf("2. Search student(s) by name\n");
     printf("3. Search student(s) by program\n");
     printf("4. Show statistics of current record\n");
+    printf("0. Go back\n");
     int choice = -1;
     scanf("%d", &choice);
     return choice;
@@ -512,6 +555,7 @@ void main()
                     printf("Enter personal numer to search for\n");
                     char searchstring[11];
                     scanf("%10s", searchstring);
+                    printf("Searching for %s,\n", searchstring);
                     search_student_personal_nr(searchstring, &all_students);
                 }
                 else if (search_choice == 2)
@@ -530,7 +574,7 @@ void main()
                 }
                 else if (search_choice == 4)
                 {
-                    // Skriv funk för statistics!
+                    print_statistics(&all_programs, &all_students);
                 }
                 else
                     break;
@@ -554,6 +598,7 @@ void main()
                 printf("Choose name of file to load\n");
                 char filenamne[64];
                 scanf("%63s", filenamne);
+                printf("Reading from %s\n", filenamne);
                 read_from_file(filenamne, &all_programs, &all_students);
             }
             else
@@ -576,29 +621,3 @@ void main()
         }
     }
 }
-
-// strstr
-//  program_t maskintektik = {0};
-//  strncpy(maskintektik.name, "Maskinteknik", sizeof(maskintektik.name) - 1);
-//  program_t jobbamedata = {0};
-//  save_program(maskintektik, &all_programs);
-//  save_program(jobbamedata, &all_programs);
-//  student_t tempstudent = (add_student(&all_programs));
-//  save_student(tempstudent, &all_students);
-//  printf("*****************************\nPRINTING PROGRAM RECORD\n*****************************\n");
-//  print_program_record(&all_programs);
-//  printf("*****************************\nPRINTING STUDENT RECORD\n*****************************\n");
-//  print_student_record(&all_students);
-//  clean_up(&all_programs, &all_students);
-//  funk add
-//   print
-//   save
-//   funk sök
-//   sscanf personnummer
-//   funk modify
-//   sscanf personnummer
-//   funk save
-//   skapa fil och skriv till den
-//   funk load database
-//   confirmation on load
-//   reads file to memory in form of structs
