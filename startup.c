@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <ctype.h>
-#include <stdbool.h>
+#include <stdbool.h>cma
 
 typedef enum gender
 {
@@ -601,8 +601,6 @@ void main()
                 printf("Reading from %s\n", filenamne);
                 read_from_file(filenamne, &all_programs, &all_students);
             }
-            else
-                continue;
         }
         if (choice == 7)
         {
@@ -621,3 +619,5 @@ void main()
         }
     }
 }
+
+// TODO NEXT TIME LABBA MED MINDRE FILER (i dubbel bemärkelse), MANUAL ADD ETC.
