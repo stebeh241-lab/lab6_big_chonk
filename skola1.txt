@@ -1,0 +1,725 @@
+program
+Maskinteknik
+20260001
+Johan Karlsson
+maskin@skola.se
+program
+Datateknik
+20260002
+Erik Eriksson
+data@skola.se
+program
+Ekonomi
+20260003
+Anna Larsson
+ekonomi@skola.se
+program
+Sjuksköterska
+20260004
+Maria Berg
+vård@skola.se
+program
+Statsvetenskap
+20260005
+Sven Svensson
+stats@skola.se
+student
+1001010001
+Sven Anderson
+0
+25
+sven.a@mail.com
+20260001
+student
+1001010002
+Erik Bengtsson
+0
+25
+erik.b@mail.com
+20260001
+student
+1001010003
+Anna Carlsson
+1
+25
+anna.c@mail.com
+20260001
+student
+1001010004
+Maria Danielsson
+1
+25
+maria.d@mail.com
+20260001
+student
+1001010005
+Johan Eliasson
+0
+25
+johan.e@mail.com
+20260001
+student
+1001010006
+Karin Fredriksson
+1
+25
+karin.f@mail.com
+20260001
+student
+1001010007
+Anders Gunnarsson
+0
+25
+anders.g@mail.com
+20260001
+student
+1001010008
+Lena Hansson
+1
+25
+lena.h@mail.com
+20260001
+student
+1001010009
+Peter Isaksson
+0
+25
+peter.i@mail.com
+20260001
+student
+1001010010
+Sara Jakobsson
+1
+25
+sara.j@mail.com
+20260001
+student
+2001010001
+Mikael Knutsson
+0
+22
+mikael.k@mail.com
+20260002
+student
+2001010002
+Eva Lindberg
+1
+22
+eva.l@mail.com
+20260002
+student
+2001010003
+Lars Magnusson
+0
+22
+lars.m@mail.com
+20260002
+student
+2001010004
+Ingrid Nilsson
+1
+22
+ingrid.n@mail.com
+20260002
+student
+2001010005
+Olof Olofsson
+0
+22
+olof.o@mail.com
+20260002
+student
+2001010006
+Ulla Persson
+1
+22
+ulla.p@mail.com
+20260002
+student
+2001010007
+Karl Qvist
+0
+22
+karl.q@mail.com
+20260002
+student
+2001010008
+Britta Runesson
+1
+22
+britta.r@mail.com
+20260002
+student
+2001010009
+Nils Samuelsson
+0
+22
+nils.s@mail.com
+20260002
+student
+2001010010
+Greta Tuvesson
+1
+22
+greta.t@mail.com
+20260002
+student
+2001010011
+Fredrik Uddsson
+0
+22
+fredrik.u@mail.com
+20260002
+student
+2001010012
+Lisa Valund
+1
+22
+lisa.v@mail.com
+20260002
+student
+2001010013
+Hans Wallin
+0
+22
+hans.w@mail.com
+20260002
+student
+2001010014
+Monica Xander
+1
+22
+monica.x@mail.com
+20260002
+student
+2001010015
+Gustav Yngvesson
+0
+22
+gustav.y@mail.com
+20260002
+student
+2001010016
+Birgitta Zetterberg
+1
+22
+birgitta.z@mail.com
+20260002
+student
+2001010017
+Torbjörn Åkesson
+0
+22
+torbjorn.a@mail.com
+20260002
+student
+2001010018
+Agneta Öberg
+1
+22
+agneta.o@mail.com
+20260002
+student
+2001010019
+Bertil Alm
+0
+22
+bertil.a@mail.com
+20260002
+student
+2001010020
+Cecilia Blom
+1
+22
+cecilia.b@mail.com
+20260002
+student
+2001010021
+David Crona
+0
+22
+david.c@mail.com
+20260002
+student
+2001010022
+Elsa Dahl
+1
+22
+elsa.d@mail.com
+20260002
+student
+2001010023
+Filip Ek
+0
+22
+filip.e@mail.com
+20260002
+student
+2001010024
+Gunilla Falk
+1
+22
+gunilla.f@mail.com
+20260002
+student
+2001010025
+Hugo Gran
+0
+22
+hugo.g@mail.com
+20260002
+student
+2001010026
+Ida Holm
+1
+22
+ida.h@mail.com
+20260002
+student
+2001010027
+Jan Järv
+0
+22
+jan.j@mail.com
+20260002
+student
+2001010028
+Klara Kvist
+1
+22
+klara.k@mail.com
+20260002
+student
+2001010029
+Lennart Lund
+0
+22
+lennart.l@mail.com
+20260002
+student
+2001010030
+Maja Myhr
+1
+22
+maja.m@mail.com
+20260002
+student
+2001010031
+Niklas Nord
+0
+22
+niklas.n@mail.com
+20260002
+student
+2001010032
+Olivia Odén
+1
+22
+olivia.o@mail.com
+20260002
+student
+2001010033
+Patrik Palm
+0
+22
+patrik.p@mail.com
+20260002
+student
+2001010034
+Quintus Quist
+0
+22
+quintus.q@mail.com
+20260002
+student
+2001010035
+Rosa Ros
+1
+22
+rosa.r@mail.com
+20260002
+student
+2001010036
+Stig Sten
+0
+22
+stig.s@mail.com
+20260002
+student
+2001010037
+Tina Toft
+1
+22
+tina.t@mail.com
+20260002
+student
+2001010038
+Urban Udd
+0
+22
+urban.u@mail.com
+20260002
+student
+2001010039
+Vera Vinter
+1
+22
+vera.v@mail.com
+20260002
+student
+2001010040
+Wilhelm Wik
+0
+22
+wilhelm.w@mail.com
+20260002
+student
+2001010041
+Xenia Xylo
+1
+22
+xenia.x@mail.com
+20260002
+student
+2001010042
+Yngve Yrsa
+0
+22
+yngve.y@mail.com
+20260002
+student
+2001010043
+Zelda Zorn
+1
+22
+zelda.z@mail.com
+20260002
+student
+2001010044
+Åke Ångström
+0
+22
+ake.a@mail.com
+20260002
+student
+2001010045
+Östen Öst
+0
+22
+osten.o@mail.com
+20260002
+student
+3001010001
+Adam Alm
+0
+21
+adam.a@mail.com
+20260003
+student
+3001010002
+Beata Blå
+1
+21
+beata.b@mail.com
+20260003
+student
+3001010003
+Calle Cool
+0
+21
+calle.c@mail.com
+20260003
+student
+3001010004
+Doris Dag
+1
+21
+doris.d@mail.com
+20260003
+student
+3001010005
+Egon Ek
+0
+21
+egon.e@mail.com
+20260003
+student
+3001010006
+Fanny Flykt
+1
+21
+fanny.f@mail.com
+20260003
+student
+3001010007
+Gunnar Grön
+0
+21
+gunnar.g@mail.com
+20260003
+student
+3001010008
+Hanna Hav
+1
+21
+hanna.h@mail.com
+20260003
+student
+3001010009
+Ivar Is
+0
+21
+ivar.i@mail.com
+20260003
+student
+3001010010
+Julia Jul
+1
+21
+julia.j@mail.com
+20260003
+student
+3001010011
+Kurt Kula
+0
+21
+kurt.k@mail.com
+20260003
+student
+3001010012
+Lilly Lax
+1
+21
+lilly.l@mail.com
+20260003
+student
+3001010013
+Mats Mus
+0
+21
+mats.m@mail.com
+20260003
+student
+3001010014
+Nora Natt
+1
+21
+nora.n@mail.com
+20260003
+student
+3001010015
+Otto Orm
+0
+21
+otto.o@mail.com
+20260003
+student
+4001010001
+Pia Pil
+1
+24
+pia.p@mail.com
+20260004
+student
+4001010002
+Quinn Qvick
+1
+24
+quinn.q@mail.com
+20260004
+student
+4001010003
+Rikard Räv
+0
+24
+rikard.r@mail.com
+20260004
+student
+4001010004
+Siv Sjö
+1
+24
+siv.s@mail.com
+20260004
+student
+4001010005
+Tore Torn
+0
+24
+tore.t@mail.com
+20260004
+student
+4001010006
+Ulla Ull
+1
+24
+ulla.u@mail.com
+20260004
+student
+4001010007
+Valter Våg
+0
+24
+valter.v@mail.com
+20260004
+student
+4001010008
+Wendy Webb
+1
+24
+wendy.w@mail.com
+20260004
+student
+4001010009
+Xavier Xylo
+0
+24
+xavier.x@mail.com
+20260004
+student
+4001010010
+Yrsa Yr
+1
+24
+yrsa.y@mail.com
+20260004
+student
+4001010011
+Zeke Zink
+0
+24
+zeke.z@mail.com
+20260004
+student
+4001010012
+Åsa Åska
+1
+24
+asa.a@mail.com
+20260004
+student
+4001010013
+Örjan Örn
+0
+24
+orjan.o@mail.com
+20260004
+student
+4001010014
+Albin Al
+0
+24
+albin.a@mail.com
+20260004
+student
+4001010015
+Bea Bok
+1
+24
+bea.b@mail.com
+20260004
+student
+4001010016
+Casper Ceder
+0
+24
+casper.c@mail.com
+20260004
+student
+4001010017
+Dina Dal
+1
+24
+dina.d@mail.com
+20260004
+student
+4001010018
+Edvin Ed
+0
+24
+edvin.e@mail.com
+20260004
+student
+4001010019
+Fia Fält
+1
+24
+fia.f@mail.com
+20260004
+student
+4001010020
+Göran Gren
+0
+24
+goran.g@mail.com
+20260004
+student
+4001010021
+Hilda Hed
+1
+24
+hilda.h@mail.com
+20260004
+student
+4001010022
+Ivan Igel
+0
+24
+ivan.i@mail.com
+20260004
+student
+4001010023
+Jenny Järn
+1
+24
+jenny.j@mail.com
+20260004
+student
+4001010024
+Kalle Kol
+0
+24
+kalle.k@mail.com
+20260004
+student
+4001010025
+Lotta Lera
+1
+24
+lotta.l@mail.com
+20260004
+student
+5001010001
+Måns Moln
+0
+20
+mans.m@mail.com
+20260005
+student
+5001010002
+Nelly Ny
+1
+20
+nelly.n@mail.com
+20260005
+student
+5001010003
+Oscar Oxeryd
+0
+20
+oscar.o@mail.com
+20260005
+student
+5001010004
+Paula Prick
+1
+20
+paula.p@mail.com
+20260005
+student
+5001010005
+Qvinten Qvist
+0
+20
+qvinten.q@mail.com
+20260005
